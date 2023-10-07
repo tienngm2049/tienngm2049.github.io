@@ -1,11 +1,7 @@
-<div align="center">
-  <h1>portfolYOU</h1>
-  <i>A beautiful portfolio Jekyll theme that works with GitHub Pages.</i>
+This is my GitHub repository page, dedicated to my personal projects, data science portfolio, and blogs. It's built upon Jekyll & portfolYOU, a fork of Minimal Mistakes, to provide a clean and minimalistic platform for sharing my work and insights. 
 
-  <a href="https://YoussefRaafatNasry.github.io/portfolYOU/">Live Demo</a>
-  •
-  <a href="https://YoussefRaafatNasry.github.io/portfolYOU/docs/">Documentation</a>
+Explore my projects, delve into my data science journey, and read my blogs on topics ranging from data analysis to literature, philosophy, and psychology. 
 
-  <a href="https://YoussefRaafatNasry.github.io/portfolYOU"><img src="screenshot.gif"></a>
-  <sub><sup>© 2019 portfolYOU, licensed under the <a href="./LICENSE">MIT License</a>.</sup></sub>
-</div>
+© 2019 portfolYOU, licensed under the <a href="./LICENSE">MIT License</a>.
+
+Thank you!

@@ -1,10 +1,9 @@
 ### Site Settings ###
-title               : Priyanka Rao
-description         : >-
-                      Roboticist |
-                      - Modeling and motion planning of tendon-driven soft continuum robots. 
+title               : Tien Nguyen
+description         : I'm learning Data Science and Front-End Developement from 2023. 
+                      Economics background, non-tech.
 baseurl             : ""                     # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
-repository          : priyankarao257/priyankarao257.github.io     # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
+repository          : tienngm2049/tienngm2049.github.io     # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
 remote_theme        : YoussefRaafatNasry/portfolYOU
 open_new_tab        : true                             # Opens external URLs in new tab (works for posts, projects and navbar only)
 
@@ -24,26 +23,25 @@ nav_exclude:                                            # The following paths ar
 
 ### Author Info ###
 author:
-  name              : Priyanka Rao
+  name              : Tien Nguyen (Jeiz)
   image             : /images/profile_picture.jpg
-  googlescholar     : citations?user=0rQBVRQAAAAJ&hl=en
-#  behance           : your_username
+# googlescholar     : 
+# behance           : your_username
 # dribbble          : your_username
-  email             : priyankaprakash.rao@mail.utoronto.ca
-#  facebook          : your_username
-#  github            : your_username
+  email             : tienngm2049@gmail.com
+# facebook          : your_username
+# github            : your_username
 # gitlab            : your_username
 # instagram         : your_username
 # kaggle            : your_username
-  linkedin          : priyankarao25
-  
-#  medium            : your_username
+  linkedin          : tienngm2049
+# medium            : your_username
 # soundcloud        : your_username
 # spotify           : your_username
 # stackoverflow     : your_user_id
 # tumblr            : your_username.tumblr.com
 # twitch            : your_username
-#  twitter           : your_username
+# twitter           : your_username
 # vimeo             : your_username
 # youtube           : your_channel_name
 # keybase           : your_username
@@ -70,9 +68,9 @@ disqus:
 
 ### Analytics ###
 analytics:
-  enabled: true                                        # Set true to enable analytics
+  enabled: false                                        # Set true to enable analytics
   google:
-    tracking_id: G-LKN8N391ZR
+    tracking_id: 
 
 ### Buy me a coffee ###
 # See https://www.buymeacoffee.com/
