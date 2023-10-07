@@ -1,7 +1,7 @@
 ### Site Settings ###
 title               : Tien Nguyen
-description         : a data science learner
-                      Economics background, non-tech.
+description         : a data science learner. \n
+                      economics background, non-tech.
 baseurl             : ""                     # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
 repository          : tienngm2049/tienngm2049.github.io     # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
 remote_theme        : YoussefRaafatNasry/portfolYOU
