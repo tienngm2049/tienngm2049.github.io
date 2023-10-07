@@ -1,6 +1,6 @@
 ### Site Settings ###
 title               : Tien Nguyen
-description         : I'm learning Data Science and Front-End Developement from 2023. 
+description         : a data science learner
                       Economics background, non-tech.
 baseurl             : ""                     # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
 repository          : tienngm2049/tienngm2049.github.io     # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
@@ -23,18 +23,18 @@ nav_exclude:                                            # The following paths ar
 
 ### Author Info ###
 author:
-  name              : Tien Nguyen (Jeiz)
-  image             : /images/profile_picture.jpg
+name              : Tien Nguyen
+image             : /images/profile_picture.jpg
 # googlescholar     : 
 # behance           : your_username
 # dribbble          : your_username
-  email             : tienngm2049@gmail.com
+email             : tienngm2049@gmail.com
 # facebook          : your_username
-# github            : your_username
+github            : tienngm2049
 # gitlab            : your_username
 # instagram         : your_username
 # kaggle            : your_username
-  linkedin          : tienngm2049
+linkedin          : tienngm2049
 # medium            : your_username
 # soundcloud        : your_username
 # spotify           : your_username
@@ -55,10 +55,10 @@ permalink: /blog_modeling/:title
 ### Collections ###
 collections:
   projects:
-    output: true
-    permalink: /projects/:name
+  output: true
+  permalink: /projects/:name
   elements:                                             # For Documentation Only
-    output: true                                        # For Documentation Only
+  output: true                                        # For Documentation Only
 
 
 ### Disqus ###
@@ -68,9 +68,9 @@ disqus:
 
 ### Analytics ###
 analytics:
-  enabled: false                                        # Set true to enable analytics
+  enabled: true                                        # Set true to enable analytics
   google:
-    tracking_id: 
+  tracking_id: GTM-WVWX8BPG
 
 ### Buy me a coffee ###
 # See https://www.buymeacoffee.com/
