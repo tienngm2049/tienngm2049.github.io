@@ -1,5 +1,5 @@
 ---
-title: Modeling TDCR contacts - the Kinematic way
+title: The Power to Will - Nietzsche's Philosophy Unveiled
 tags: [Philosophy]
 style: fill
 color: light
