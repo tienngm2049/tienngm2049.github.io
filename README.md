@@ -1,4 +1,4 @@
-This is my GitHub repository page, dedicated to my personal projects, data science portfolio, and blogs. It's built upon Jekyll & portfolYOU, a fork of Minimal Mistakes, to provide a clean and minimalistic platform for sharing my work and insights. 
+This is my GitHub repository page, dedicated to my personal projects, data science portfolio, and blogs. It's built upon Jekyll & portfolYOU.
 
 Explore my projects, delve into my data science journey, and read my blogs on topics ranging from data analysis to literature, philosophy, and psychology. 
 
