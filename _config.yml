@@ -1,8 +1,8 @@
 ### Site Settings ###
-title               : Tien Nguyen
-description         : >
-                      a data science learner          
-                      economics background, non-tech
+title               : Tien Nguyen (Jeiz's)
+description: >
+  a data science learner
+  economics background, non-tech
 baseurl             : ""                     # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
 repository          : tienngm2049/tienngm2049.github.io     # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
 remote_theme        : YoussefRaafatNasry/portfolYOU
@@ -56,8 +56,7 @@ permalink: /blog/:title
 collections:
   projects:
     output: true
-    permalink: /projects/:name
-    elements:                                             # For Documentation Only
+    permalink: /projects/:name                                           # For Documentation Only
     output: true                                        # For Documentation Only
 
 
