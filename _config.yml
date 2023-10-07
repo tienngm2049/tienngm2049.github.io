@@ -1,7 +1,7 @@
 ### Site Settings ###
 title               : Tien Nguyen
-description         : a data science learner. \n
-                      economics background, non-tech.
+description         : "a data science learner\n
+                      economics background, non-tech"
 baseurl             : ""                     # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
 repository          : tienngm2049/tienngm2049.github.io     # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
 remote_theme        : YoussefRaafatNasry/portfolYOU
@@ -22,19 +22,19 @@ nav_exclude:                                            # The following paths ar
 
 
 ### Author Info ###
-author:
-name              : Tien Nguyen
-image             : /images/profile_picture.jpg
+  author:
+  name              : Tien Nguyen
+  image             : /images/profile_picture.jpg
 # googlescholar     : 
 # behance           : your_username
 # dribbble          : your_username
-email             : tienngm2049@gmail.com
+  email             : tienngm2049@gmail.com
 # facebook          : your_username
-github            : tienngm2049
+  github            : tienngm2049
 # gitlab            : your_username
 # instagram         : your_username
 # kaggle            : your_username
-linkedin          : tienngm2049
+  linkedin          : tienngm2049
 # medium            : your_username
 # soundcloud        : your_username
 # spotify           : your_username
