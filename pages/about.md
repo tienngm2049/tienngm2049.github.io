@@ -12,8 +12,6 @@ This is going to be a pretty empty page while the rest of the website gets fille
 
 The fact that I needed to establish the "Why" in the beginning of this obviously useless page points to my PhD training. 
 
-![](https://media.tenor.com/BjKYVp8uYe8AAAAj/%E7%AD%8B%E3%83%88%E3%83%AC-%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0.gif) 
-
 Tools I'm familiar with:
 - 
 
