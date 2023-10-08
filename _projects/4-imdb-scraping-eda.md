@@ -1,5 +1,4 @@
 ---
-
 name: Portfolio Project 01 - IMDB Movie Data Analysis
 tools: [Web Scraping, EDA, Python, Pandas, Seaborn]
 image: https://ieeexplore.ieee.org/mediastore_new/IEEE/content/media/7083369/10102643/10093050/rao1-3264869-small.gif
@@ -24,4 +23,6 @@ Welcome to my first portfolio project! In this engaging project, I embarked on a
 The culmination of this project serves as a valuable resource for movie enthusiasts, data enthusiasts, and anyone intrigued by the trends within the film industry. By exploring this project, you'll gain insights into the latest top 1000 IMDB movies and the fascinating stories they tell.
 
 **Explore the Project**: Dive deeper into this cinematic data exploration journey by accessing the project file [here](https://shorturl.at/fqEK1).
+
+
 
