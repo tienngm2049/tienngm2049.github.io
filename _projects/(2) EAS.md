@@ -1,4 +1,4 @@
----
+<!-- ---
 name: Using Euler-Arc Splines to model TDCRs
 tools: [Modeling, TDCR]
 image: https://ieeexplore.ieee.org/mediastore_new/IEEE/content/media/9560720/9560666/9561700/rao1-p7-rao-large.gif
@@ -42,4 +42,4 @@ For more details, there's always some good old-fashioned paper reading :
 <p class="text-center">
 {% include elements/button.html link="https://ieeexplore.ieee.org/abstract/document/9561700" text="Link to paper 1 [ICRA, 2021]" %}, 
 {% include elements/button.html link="https://ieeexplore.ieee.org/abstract/document/9804779" text="Link to paper 2 [RAL + IROS, 2022]" %}
-</p>
+</p> -->
