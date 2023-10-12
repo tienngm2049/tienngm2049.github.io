@@ -1,9 +1,9 @@
 ---
 name: Exploratory Data Analysis and Classification Task
-tools: [Python, Pandas, Seaborn, Scikit-learn]
+tools: [Pandas, Seaborn, Decision Tree, Random Forest, XGBoost]
+image: /images/bank-mkt.jpg
 description: This project aims to conduct EDA and classification modeling using machine learning
 <!-- external_url: -->
-image: /images/bank-mkt.jpg
 ---
 Welcome to my second portfolio project! In this project, I embarked on an exciting journey into the world of bank marketing, with a strong focus on Exploratory Data Analysis (EDA) and Classification Modeling. My primary objective was to predict whether a client would subscribe to a term deposit, a pivotal task for any financial institution.
 

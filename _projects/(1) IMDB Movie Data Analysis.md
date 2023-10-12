@@ -1,5 +1,5 @@
 ---
-name: Portfolio Project 01 - IMDB Movie Data Analysis
+name: IMDB Movie Data Analysis
 tools: [Web Scraping, EDA, Python, Pandas, Seaborn]
 image: /images/imdb.jpg
 description: Exploring the Latest Top 1000 IMDB Movies
