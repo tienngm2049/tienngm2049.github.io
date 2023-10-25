@@ -14,7 +14,6 @@ In the vast realm of philosophy, Friedrich Nietzsche emerges as a formidable thi
 **The Will to Power: The Essence of Existence**
 
 Nietzsche proposed that the world's fundamental driving force is the "Will to Power." It forms the bedrock of both the material and spiritual dimensions of our existence. This concept shares echoes with Eastern philosophy's "Dao" (Tao) and the Greek notion of "Logos" – the underlying principle that governs all aspects of existence. Nietzsche's quest aimed to answer a fundamental question: What truly defines the essence of life?
-![ying-yang](https://github.com/tienngm2049/tienngm2049.github.io/assets/131929681/03310f2b-b87c-40ae-a7a2-3e0e7db52ae9)
 
 **Peeling Away the Surface Layers**
 
@@ -27,7 +26,6 @@ For instance, this apparent anger might, in reality, be an expression of passion
 Nietzsche's philosophy also delves into the duality of human nature. He believed that our actions ultimately stem from a single will – the desire to surpass others, to excel. Even the actions of ascetics and those on a spiritual quest can be traced back to the Will to Power. They aspire to elevate themselves, to reach a state closer to divinity or enlightenment, thereby elevating their status above ordinary individuals.
 
 **The Will to Power in Society**
-![51 -Friedrich-Nietzsche-Anh-Ethics](https://github.com/tienngm2049/tienngm2049.github.io/assets/131929681/084fae34-c9f8-4e46-9864-670622574564)
 
 This concept extends beyond individual behavior and seeps into the very fabric of societal structures. Nietzsche argued that the driving force behind human culture is the relentless pursuit of surpassing others. Think back to the origins of the Olympics, deeply rooted in ancient Greece. Athletes competed not only to participate but primarily to demonstrate their superiority. This competitive spirit vividly embodies the Will to Power – an unceasing yearning to outperform others.
 
