@@ -17,14 +17,11 @@ I'm a passionate data science learner with expertise in Python, SQL, and data an
 
 🔭 Here are some of the tools and technologies I work with:
 
-- **Languages:** SQL, Python, Git
-- **Data Analysis:** Pandas, NumPy
-- **Web Scraping:** BeautifulSoup4, Selenium
-- **Statistics:** SciPy, Statsmodels, Pingouin
-- **Machine Learning:** Scikit-learn
-- **Deep Learning:** Ongoing learning with Pytorch and NLP
-- **Visualization:** Matplotlib, Seaborn, Plotly
-- **Dashboard:** PowerBI, Tableau
+<p align="center">
+  <a href="tienngm2049.github.io/about">
+    <img src="https://skillicons.dev/icons?i=python,vscode,git,postgresql,mysql,md,selenium,java,mongodb,docker,html,css" />
+  </a>
+</p>
 
 ## My Timeline
 
