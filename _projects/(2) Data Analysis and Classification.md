@@ -1,7 +1,7 @@
 ---
 name: Data Analysis and Classification for Marketing Campaign Optimization
 tools: [Pandas, Seaborn, Decision Tree, Random Forest, XGBoost]
-image: /images/bank-marketing.png
+image: /images/bank-mkt.png
 description: Explore the dataset through EDA and predict term deposit subscriptions using classification models.
 <!-- external_url: -->
 ---
