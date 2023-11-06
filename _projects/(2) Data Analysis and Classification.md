@@ -49,6 +49,7 @@ Building the model involves three key steps:
 
 1. Setting a baseline.
 2. Building different models, including Decision Tree, Random Forest, and XGBoost, with extensive hyperparameter tuning.
+3. Deploy the final model.
 
 This phase is particularly interesting, as finding the best model involves deploying the `gridsearchCV` and can take more than three hours.
 
