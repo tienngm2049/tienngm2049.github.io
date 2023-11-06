@@ -20,7 +20,6 @@ I'm a passionate data science learner with expertise in Python, SQL, and data an
 <p align="center">
 <!--   <a href="tienngm2049.github.io/about"> -->
     <img src="https://skillicons.dev/icons?i=python,vscode,git,postgresql,mysql,md,selenium,java,mongodb,docker,html,css" />
-  </a>
 </p>
 
 ## My Timeline
