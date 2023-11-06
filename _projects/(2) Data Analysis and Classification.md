@@ -23,7 +23,7 @@ In this part, I delve into exploratory data analysis (EDA) and lay the foundatio
 
 - Univariate analysis explores both numerical and categorical features using histograms, box plots, and bar plots.
 
-![Numerical Features](/images/project_02/numerical-features.png)
+![Numerical Features](/images/project_02/numerical-features.png "Figure 1: Numerical Features")
 
 ![Categorical Features](/images/project_02/categorical-features.png)
 
