@@ -42,5 +42,5 @@ This project adds significant value to businesses seeking to enhance their sales
 I gained valuable knowledge about hypothesis testing in this case, including both parametric and non-parametric tests, as well as assumptions and power analysis. The experience with bootstrapping and the extensive examination of statistical methods have made this project particularly satisfying. What began as a simple set of tests evolved into a deep dive into statistics, ultimately providing me with a sense of accomplishment and learning.
 
 <p class="text-center">
-{% include elements/button.html link="https://github.com/tienngm2049/Portfolio-Projects/tree/main/Portfolio%20Project%2004%20-%20Sales%20Conversion%20Optimization%20-%20AB%20Test%20with%20Hypothesis%20Testing" text="Explore the Project" %}
+{% include elements/button.html link="https://github.com/tienngm2049/projects/tree/main/portfolio_04_sales_conversion_ab_test_hypothesis_testing" text="Explore the Project" %}
 </p>

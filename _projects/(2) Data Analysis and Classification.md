@@ -83,5 +83,5 @@ These recommendations offer a strategic framework for optimizing the bank's mark
 This project showcases a robust data analysis and machine learning approach, demonstrating a strong understanding of data science principles and their practical applications.
 
 <p class="text-center">
-{% include elements/button.html link="https://shorturl.at/CIRSW" text="Explore the Project" %}
+{% include elements/button.html link="https://github.com/tienngm2049/projects/tree/main/portfolio_02_bank_marketing_eda_classification" text="Explore the Project" %}
 </p>
