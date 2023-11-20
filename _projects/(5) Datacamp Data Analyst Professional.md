@@ -1,3 +1,4 @@
+---
 name: DataCamp Data Analyst Professional Certificate
 tools: [Pandas, Seaborn, Matplotlib, Power BI, Powerpoint]
 image: https://github.com/tienngm2049/datacamp-da-professional/blob/main/dashboard/dashboard_product_sales.png?raw=true
