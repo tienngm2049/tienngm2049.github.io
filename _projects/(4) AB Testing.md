@@ -5,8 +5,9 @@ image: /images/abtest.jpg
 description: This project utilizes A/B testing and hypothesis testing to optimize sales conversion optimization of a company
 # external_url
 ---
+# Sales Conversion Optimization - AB Test with Hypothesis Testing
 
-Welcome to my fourth portfolio project! In this exciting endeavor, I immersed myself in the world of sales conversion optimization through A/B testing and hypothesis testing. The primary objective was to evaluate the impact of various strategies on sales conversion rates, employing statistical techniques to draw actionable insights.
+Welcome to my project! The primary objective was to evaluate the impact of various strategies on sales conversion rates, employing statistical techniques to draw actionable insights.
 
 ## Project Overview
 
@@ -14,16 +15,14 @@ Welcome to my fourth portfolio project! In this exciting endeavor, I immersed my
 
 **Hypothesis Testing**: Hypothesis testing is a fundamental statistical technique used to make informed decisions based on sample data. I formulated hypotheses, conducted hypothesis tests, and interpreted the results to determine the statistical significance of the tested strategies.
 
-**Metrics**: The project focused on three key metrics: Conversion Rate (CR), Click-Through Rate (CTR), and Cost Per Click (CPC). These metrics were chosen for their importance in assessing the effectiveness of sales conversion optimization strategies and can be easily calculated from the dataset.
+**Metrics**: The project focused on three key metrics: Conversion Rate (CR), Click-Through Rate (CTR), and Cost Per Click (CPC). 
+
+These metrics were chosen for their importance in assessing the effectiveness of sales conversion optimization strategies and can be easily calculated from the dataset.
 
 **Tests and Plots Used**:
 - **Normality Testing**: To assess the normal distribution of data, I utilized the Shapiro-Wilk test, QQ plots, and histograms.
 - **Power Analysis**: I conducted power analysis to choose suitable sample sizes, especially since one campaign had a significantly smaller sample size than the others.
 - **Bootstrapping and Mann-Whitney U Test**: To calculate p-values for each pair of campaigns, I employed bootstrapping techniques and the Mann-Whitney U test. This was necessary due to the uneven sample sizes among campaigns.
-
-## Experimental Design and A/B Testing
-
-The heart of this project lies in the design and execution of A/B tests. I carefully structured experiments, including defining the control and experimental groups, selecting appropriate metrics, and ensuring randomization. 
 
 ### Hypothesis Formulation and Testing
 

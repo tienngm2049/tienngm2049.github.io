@@ -27,23 +27,30 @@ PCA played a pivotal role in this project. The selection of the number of compon
 
 2. **Kaiser Criterion**: Eigenvalues greater than 1 were considered, as they indicate significant information retention.
 
+![kaiser](/images/project_03/kaiser.png)
+
+And I have found the ideal number of components are 4 and move to the building model stage.
+
 ### Part 4: K-means Clustering & Customer Segmentation
 #### K-means Clustering
 
 Determining the optimal number of clusters (K) was a crucial step. I utilized two methods:
 
 1. **Elbow Method**: This technique helped identify the "elbow" point on the plot of within-cluster sum of squares (WCSS) versus the number of clusters. The elbow point signifies an optimal K value.
+![elbow_method](/images/project_03/elbow.png)
+1. **Silhouette Score**: The Silhouette Score measures the quality of clustering. I aimed for a higher Silhouette Score to validate the chosen K value.
+![silhouette](/images/project_03/silhouette.png)
 
-2. **Silhouette Score**: The Silhouette Score measures the quality of clustering. I aimed for a higher Silhouette Score to validate the chosen K value.
+And finally get the 4 clusters. Then I plug these clusters into the dataset and generate some insights about these 4 clusters.
 
 #### Customer Segments
 
 The final result yielded four distinct customer segments:
 
-1. **Segment 0: Active and High-Spending Shoppers**
-2. **Segment 1: Value-Conscious Savers**
-3. **Segment 2: Affluent Explorers**
-4. **Segment 3: Established High-Income Shoppers**
+1. **Segment 0: The Loyal Veterans**
+2. **Segment 1: The Budget-Conscious Shoppers**
+3. **Segment 2: The Affluent Aficionados**
+4. **Segment 3: The Silent High Rollers**
 
 ### Project Value and Reflection
 
