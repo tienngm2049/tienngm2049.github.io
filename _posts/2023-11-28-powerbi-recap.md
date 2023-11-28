@@ -2,7 +2,7 @@
 title: MS Power BI Data Analyst Professional Certificate - Recap Learning
 tags: [DAX, Data Modelling, Power BI, Excel, Storytelling, Dashboard]
 style: fill
-color: dark
+color: secondary
 image : /images/powerbi/course.png
 description:  This is where I recap my learning in Microsoft Power BI 
 ---
