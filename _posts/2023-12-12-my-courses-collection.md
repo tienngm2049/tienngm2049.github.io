@@ -3,11 +3,13 @@ title: A Collection of Courses
 tags: [computer science, data science, machine learning, ai, chinese, art]
 style: fill
 color: light
-description: My personalized learning roadmap for a data science career
+description: My personalized learning roadmap
 ---
-Welcome to my personalized learning roadmap for a data science career!
+Welcome to my personalized learning roadmap!
 
-All the courses listed here are available on the Coursera platform. But this is just the beginning! To further fuel your learning, I highly recommend you exploring MIT's OpenCourseWare at [MIT OCW](https://ocw.mit.edu/), Harvard's CS50 at [Harvard CS50](https://cs50.harvard.edu/), and Princeton Online at [Princeton Online](https://online.princeton.edu/).
+This includes numerous courses for a data science career as well as some of my other favorite disciplines.
+
+All the courses listed here are available on the Coursera platform. Also, I highly recommend you exploring [MIT's OpenCourseWare](https://ocw.mit.edu/), [Harvard's CS50](https://cs50.harvard.edu/), and [Princeton Online](https://online.princeton.edu/) for your own interests.
 
 Happy learning together!
 
