@@ -2,14 +2,8 @@ html {
   padding-left: calc(100vw - 100%);
 }
 
-@font-face {
-  font-family: 'Space Grotesk';
-  src: url('../assets/font/SpaceGrotesk-Regular.ttf') format('truetype');
-  /* Add more file formats if needed */
-}
-
 body {
-  font-family: 'Space Grotesk' /* , "Poppins"*/, sans-serif;
+  font-family:  "Poppins", sans-serif;
 }
 
 .badge {
