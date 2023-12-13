@@ -9,7 +9,7 @@ html {
 }
 
 body {
-  font-family: 'SpaceGrotesk', "Poppins", sans-serif;
+  font-family: 'Space Grotesk', "Poppins", sans-serif;
 }
 
 .badge {
@@ -28,6 +28,6 @@ body {
 .badge-dark {
   &,
   * {
-    color: yellow !important;
+    color: $text-white !important;
   }
 }
