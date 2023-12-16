@@ -26,6 +26,8 @@ The culmination of this project serves as a valuable resource for movie enthusia
 </p>
 
 
+Testing Embed
+<iframe title="space_mission_dashboard" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=6ed2c316-578c-418e-b3d8-ebf5c9fab11b&autoAuth=true&ctid=588b13a3-653b-4cf7-8ac0-59847eb2dc88" frameborder="0" allowFullScreen="true"></iframe>
 
 
 
