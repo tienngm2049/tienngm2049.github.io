@@ -1,5 +1,5 @@
 ---
-name: IMDB Movie Data Analysis
+name: Web Scraping - IMDB Movie Data Analysis
 tools: [Web Scraping, EDA, Python, Pandas, Seaborn]
 image: /images/imdb.jpg
 description: Exploring the Latest Top 1000 IMDB Movies
@@ -22,7 +22,7 @@ Welcome to my first portfolio project! In this engaging project, I embarked on a
 The culmination of this project serves as a valuable resource for movie enthusiasts, data enthusiasts, and anyone intrigued by the trends within the film industry. By exploring this project, you'll gain insights into the latest top 1000 IMDB movies and the fascinating stories they tell.
 
 <p class="text-center">
-{% include elements/button.html link="https://shorturl.at/fqEK1" text="Explore the Project" %}
+{% include elements/button.html link="https://github.com/tienngm2049/projects/tree/main/portfolio_01_web_scraping_and_eda" text="Explore the Project" %}
 </p>
 
 
