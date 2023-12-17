@@ -1,4 +1,4 @@
----
+<!-- ---
 title: MS Power BI Data Analyst Professional Certificate - Recap Learning
 tags: [DAX, Data Modelling, Power BI, Excel, Storytelling, Dashboard]
 style: fill
@@ -14,4 +14,4 @@ This is where I put my recap of the course [**Microsoft Power BI Data Analyst Pr
 # Course 1: 
 
 
-# Course 2: 
+# Course 2:  -->

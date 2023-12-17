@@ -1,4 +1,4 @@
----
+<!-- ---
 title: A Collection of Courses
 tags: [computer science, data science, machine learning, ai, chinese, art]
 style: fill
@@ -233,3 +233,4 @@ Table of Contents:
 
 ### Learn Mandarin Chinese: Intermediate Specialization
 [Coursera Link](https://www.coursera.org/specializations/learn-mandarin-chinese-intermediate)
+ -->

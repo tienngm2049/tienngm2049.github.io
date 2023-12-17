@@ -1,4 +1,4 @@
----
+<!-- ---
 title: Learning How To Learn - Recap Learning
 tags: [Focused vs Diffuse Thinking, Chunking]
 style: fill
@@ -22,4 +22,4 @@ Table Contents:
 # Week 3: Procrastination and Memory
 
 
-# Week 4: Renaissance Learning
+# Week 4: Renaissance Learning -->
