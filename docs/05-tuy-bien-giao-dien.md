@@ -84,6 +84,10 @@ Mở `src/styles/global.css`. Ở đầu file có các **biến CSS**:
 }
 ```
 
+**Mặc định nền tối:** thẻ `<html data-theme="dark">` trong `src/layouts/Base.astro`. Người xem bấm nút ◐
+thì site nhớ lựa chọn của họ. Muốn mặc định nền sáng thì đổi thành `data-theme="light"`; muốn theo
+cài đặt máy người xem thì xoá hẳn thuộc tính `data-theme`.
+
 Đổi `--accent` là đổi được "màu thương hiệu" của cả site. Nhớ đổi luôn bản dark mode (khối
 `[data-theme='dark']` và khối `@media (prefers-color-scheme: dark)`, hai khối có cùng giá trị).
 

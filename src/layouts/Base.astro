@@ -15,7 +15,7 @@ const fullTitle = title ? `${title} · ${SITE.name}` : SITE.title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark"><!-- mặc định nền tối; script bên dưới đổi sang sáng nếu người xem đã chọn -->
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -37,10 +37,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     />
     {math && <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.css" />}
     <script is:inline>
-      // Áp theme đã chọn trước khi trang hiện ra, tránh bị "nháy" màu
+      // Mặc định nền tối. Nếu người xem đã bấm nút đổi sáng/tối thì nhớ lựa chọn đó.
+      // Chạy trước khi trang hiện ra để không bị "nháy" màu.
       try {
         const t = localStorage.getItem('theme');
-        if (t) document.documentElement.dataset.theme = t;
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
       } catch (e) {}
     </script>
     {SITE.gtmId && (
