@@ -1,13 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
+import SecHead from '../../components/SecHead.astro';
 import { getProjects } from '../../lib/utils';
 
 const all = await getProjects();
 const current = all.filter((p) => p.data.status !== 'archive');
 const archive = all.filter((p) => p.data.status === 'archive');
 ---
-<Base title="Projects" description="Case studies in credit risk, decision science and machine learning." wide>
+<Base title="Projects" description="Case studies in credit risk, decision science and machine learning.">
   <header class="page-head">
     <p class="kicker">// Case studies &amp; archive</p>
     <h1>Projects</h1>
@@ -15,11 +16,12 @@ const archive = all.filter((p) => p.data.status === 'archive');
   </header>
   {current.length > 0 && (
     <section>
+      <SecHead n="§01" title="Case studies" note="current" />
       <div class="project-grid">{current.map((p) => <ProjectCard project={p} />)}</div>
     </section>
   )}
   <section id="archive" class="block-sm">
-    <h2 class="label-head">Archive · early learning projects (2023)</h2>
+    <SecHead n={current.length > 0 ? "§02" : "§01"} title="Archive" note="early learning projects · 2023" />
     <div class="project-grid">{archive.map((p) => <ProjectCard project={p} compact />)}</div>
   </section>
 </Base>

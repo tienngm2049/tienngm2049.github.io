@@ -9,9 +9,8 @@ interface Props {
   title?: string;
   description?: string;
   math?: boolean; // true -> nạp CSS của KaTeX để hiển thị công thức
-  wide?: boolean; // true -> nội dung rộng (danh sách project, trang bài viết có mục lục)
 }
-const { title, description = SITE.description, math = false, wide = false } = Astro.props;
+const { title, description = SITE.description, math = false } = Astro.props;
 const fullTitle = title ? `${title} · ${SITE.name}` : SITE.title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -53,7 +52,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <body>
     <div class="grid-glow" aria-hidden="true"></div>
     <Header />
-    <main class:list={['container', { wide }]}>
+    <main class="container wide"><!-- mọi trang dùng chung khung rộng như trang chủ -->
       <slot />
     </main>
     <Footer />

@@ -62,11 +62,11 @@ export const CERTIFICATIONS = [
 ];
 
 // Ngoại ngữ: hiện thành mục riêng trên trang About.
-// glyph = chữ lớn trang trí trên thẻ; score/exam = điểm và tên kỳ thi (để '' nếu không có)
+// glyph = chữ lớn trang trí trên thẻ; score/exam = điểm và tên kỳ thi (score để '' nếu không có)
 export const LANGUAGES = [
-  { name: 'English', glyph: 'EN', score: '8.0', exam: 'IELTS Academic', note: 'Working language for documentation, papers and coursework' },
-  { name: 'Chinese', glyph: '中文', score: '5', exam: 'HSK', note: 'Upper-intermediate; reads and converses in Mandarin' },
-  { name: 'Vietnamese', glyph: 'VI', score: '', exam: 'Native', note: 'First language' },
+  { name: 'English', glyph: 'EN', score: '8.0', exam: 'IELTS Academic' },
+  { name: 'Chinese', glyph: '中文', score: '5', exam: 'HSK' },
+  { name: 'Vietnamese', glyph: 'VI', score: '', exam: 'Native' },
 ];
 
 export const SKILLS = [

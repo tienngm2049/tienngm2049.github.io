@@ -1,6 +1,7 @@
 ---
 // Trang Writing: "Start here" (bài featured) → chủ đề (tag + số bài) → toàn bộ bài theo năm.
 import Base from '../../layouts/Base.astro';
+import SecHead from '../../components/SecHead.astro';
 import { getPosts, formatDate, readingTime } from '../../lib/utils';
 
 const posts = await getPosts();
@@ -16,8 +17,7 @@ posts.forEach((p) => {
   byYear.set(y, [...(byYear.get(y) ?? []), p]);
 });
 ---
-<Base title="Writing" description="Notes on statistics, credit risk modelling and machine learning." wide>
-  <div class="reading-col">
+<Base title="Writing" description="Notes on statistics, credit risk modelling and machine learning.">
     <header class="page-head">
       <p class="kicker">// Writing · {posts.length} posts</p>
       <h1>Writing</h1>
@@ -28,8 +28,8 @@ posts.forEach((p) => {
     </header>
 
     {featured.length > 0 && (
-      <section class="block-sm">
-        <h2 class="label-head">Start here</h2>
+      <section class="block-sm start-here">
+        <SecHead n="§01" title="Start here" note="best of" />
         <div class="start-grid">
           {featured.map((p) => (
             <a class="cut start-card" href={`/blog/${p.id}/`}>
@@ -42,15 +42,9 @@ posts.forEach((p) => {
       </section>
     )}
 
-    {tags.length > 0 && (
-      <section class="block-sm">
-        <h2 class="label-head">Topics</h2>
-        <ul class="topic-list">
-          {tags.map(([t, n]) => <li><a href={`/tags/${t}/`}>{t}<sup>{n}</sup></a></li>)}
-        </ul>
-      </section>
-    )}
-
+    <div class="writing-grid">
+      <div class="writing-main">
+        <SecHead n={featured.length > 0 ? "§02" : "§01"} title="Archive" note="all posts" />
     {[...byYear.entries()].map(([year, list]) => (
       <section class="block-sm">
         <h2 class="year-head"><span>{year}</span></h2>
@@ -65,5 +59,16 @@ posts.forEach((p) => {
         </ul>
       </section>
     ))}
-  </div>
+      </div>
+      <aside class="writing-side">
+    {tags.length > 0 && (
+      <section>
+        <h2 class="label-head">Topics</h2>
+        <ul class="topic-list">
+          {tags.map(([t, n]) => <li><a href={`/tags/${t}/`}>{t}<sup>{n}</sup></a></li>)}
+        </ul>
+      </section>
+    )}
+      </aside>
+    </div>
 </Base>

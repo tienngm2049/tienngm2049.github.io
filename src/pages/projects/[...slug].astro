@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Toc from '../../components/Toc.astro';
 import { getProjects, formatDate } from '../../lib/utils';
 
 export async function getStaticPaths() {
@@ -8,7 +9,8 @@ export async function getStaticPaths() {
   return projects.map((p) => ({ params: { slug: p.id }, props: { project: p } }));
 }
 const { project } = Astro.props;
-const { Content } = await render(project);
+const { Content, headings } = await render(project);
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
 const d = project.data;
 const summary = [
   ['Problem', d.problem],
@@ -17,6 +19,7 @@ const summary = [
 ].filter(([, v]) => v);
 ---
 <Base title={d.title} description={d.description} math>
+  <div class:list={['post-layout', { 'has-toc': toc.length > 0 }]}>
   <article class="prose">
     <header class="article-head">
       <p class="kicker">{'// '}<a href="/projects/">Projects</a> · {formatDate(d.date)}
@@ -58,4 +61,12 @@ const summary = [
     {d.cover && <img class="cover" src={d.cover} alt="" loading="lazy" />}
     <Content />
   </article>
+
+    {toc.length > 0 && (
+      <aside class="toc-side" aria-label="Table of contents">
+        <p class="kicker">// Contents</p>
+        <Toc headings={toc} spy />
+      </aside>
+    )}
+  </div>
 </Base>

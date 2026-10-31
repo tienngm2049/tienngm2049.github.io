@@ -145,8 +145,8 @@ a.cut:hover, .cut.hoverable:hover { --cut-bc: color-mix(in srgb, var(--accent) 5
   letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent);
 }
 .kicker a { color: inherit; text-decoration: none; }
-.lede { font-size: 1.1rem; color: var(--muted); margin: 0 0 1rem; }
-.page-head { margin-bottom: 2.5rem; }
+.lede { font-size: 1.1rem; color: var(--muted); margin: 0 0 1rem; max-width: 44rem; }
+.page-head { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
 .page-head h1 { margin-top: 0.5rem; }
 .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-top: 3rem; }
 .section-head h2 { margin: 0 0 1rem; }
@@ -319,7 +319,6 @@ a.cut:hover, .cut.hoverable:hover { --cut-bc: color-mix(in srgb, var(--accent) 5
 @media (max-width: 520px) { .post-list li { grid-template-columns: 1fr; gap: 0.2rem; } }
 
 /* ---------- 10. Trang Writing ---------- */
-.reading-col { max-width: var(--max); margin: 0 auto; }
 .block-sm { margin-top: 2.75rem; }
 .label-head, .year-head {
   display: flex; align-items: center; gap: 0.9rem; margin: 0 0 1rem;
@@ -347,10 +346,11 @@ a.cut:hover, .cut.hoverable:hover { --cut-bc: color-mix(in srgb, var(--accent) 5
 .archive-meta { font: 0.75rem var(--font-mono); color: var(--muted); white-space: nowrap; }
 
 /* ---------- 11. Trang bài viết ---------- */
-.post-layout { display: grid; grid-template-columns: minmax(0, var(--max)); justify-content: center; gap: 4rem; }
+/* Bài viết / project: cột đọc bên trái (thẳng mép với logo), mục lục sát mép phải */
+.post-layout { display: grid; grid-template-columns: minmax(0, var(--max)); justify-content: start; gap: 4rem; }
 .toc-side { display: none; }
 @media (min-width: 1180px) {
-  .post-layout.has-toc { grid-template-columns: minmax(0, var(--max)) 15rem; }
+  .post-layout.has-toc { grid-template-columns: minmax(0, var(--max)) 16rem; justify-content: space-between; }
   .toc-side {
     display: block; position: sticky; top: 6rem; align-self: start;
     max-height: calc(100vh - 8rem); overflow: auto; padding-left: 1.1rem; border-left: 1px solid var(--border);
@@ -414,12 +414,24 @@ pre {
 :root[data-theme='dark'] .astro-code span { color: var(--shiki-dark) !important; }
 
 /* ---------- 12. Trang About ---------- */
-.about-head { display: flex; gap: 1.75rem; align-items: flex-start; }
+.about-grid { display: grid; grid-template-columns: 17rem minmax(0, 1fr); gap: 4.5rem; align-items: start; }
+.about-side { position: sticky; top: 6rem; }
+.about-side .avatar { width: 100%; max-width: 17rem; height: auto; aspect-ratio: 3 / 4; display: block; margin-bottom: 1.4rem; }
+.about-side h1 { font-size: 1.9rem; margin: 0.5rem 0 0.75rem; }
+.about-side .lede { font-size: 0.95rem; }
+.about-side .button-row { gap: 0.45rem; }
+.about-main { min-width: 0; max-width: 50rem; }
+.about-main > .doc-sec:first-child { margin-top: 0; }
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .about-side { position: static; display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 1.4rem; align-items: start; }
+  .about-side .avatar { margin: 0; }
+}
+@media (max-width: 520px) { .about-side { grid-template-columns: 1fr; } .about-side .avatar { max-width: 11rem; } }
 .avatar {
   object-fit: cover; flex-shrink: 0;
   clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
 }
-@media (max-width: 520px) { .about-head { flex-direction: column; } }
 .doc-sec { margin-top: 3.25rem; }
 .doc-sec .sec-head { margin-bottom: 1.25rem; }
 .doc-sec .sec-head h2 { font-size: 1.35rem; }
@@ -617,10 +629,13 @@ pre {
 
 /* ---------- 16. Ngoại ngữ (trang About) ---------- */
 .lang-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.85rem; }
-.lang-card { --cut: 16px; display: flex; flex-direction: column; gap: 0.2rem; padding: 1.1rem 1.2rem 1.2rem; overflow: hidden; min-height: 10.5rem; }
+.lang-card {   /* nền nhẹ giống chip ở mục Feature set, không viền */
+  --cut: 14px; --cut-bg: var(--code-bg); --cut-bc: var(--code-bg);
+  display: flex; flex-direction: column; gap: 0.2rem; padding: 1rem 1.2rem 1.1rem; overflow: hidden;
+}
 .lang-glyph {   /* chữ lớn mờ ở góc thẻ */
   position: absolute; right: 0.9rem; top: 0.7rem; z-index: 0; pointer-events: none;
-  font: 800 3.4rem/1 var(--font-head); color: transparent;
+  font: 800 2.7rem/1 var(--font-head); color: transparent;
   -webkit-text-stroke: 1px color-mix(in srgb, var(--accent) 35%, transparent);
 }
 .lang-card > :not(.lang-glyph) { position: relative; z-index: 1; }
@@ -629,6 +644,17 @@ pre {
 .lang-score strong { font: 800 2.1rem/1 var(--font-head); letter-spacing: -0.01em; }
 .lang-score span { font: 600 0.9rem var(--font-head); color: var(--muted); }
 .lang-score span:only-child { font-size: 1.6rem; line-height: 1.15; color: var(--text); font-weight: 700; }
-.lang-note { font-size: 0.82rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.5; }
 .lang-card:hover { --cut-bc: color-mix(in srgb, var(--accent) 55%, var(--border)); --cut-accent: var(--accent); }
-@media (max-width: 640px) { .lang-grid { grid-template-columns: 1fr; } .lang-card { min-height: 0; } }
+@media (max-width: 640px) { .lang-grid { grid-template-columns: 1fr; } }
+
+/* ---------- 17. Trang Writing: danh sách bên trái, chủ đề bên phải ---------- */
+.writing-grid { display: grid; grid-template-columns: minmax(0, 1fr) 16rem; gap: 4.5rem; align-items: start; }
+.writing-side { position: sticky; top: 6rem; }
+.writing-side .topic-list { flex-direction: column; gap: 0.45rem; }
+.writing-main .sec-head + .block-sm { margin-top: 0; }
+.writing-side { padding-top: 0.6rem; }
+@media (max-width: 900px) {
+  .writing-grid { grid-template-columns: 1fr; gap: 0; }
+  .writing-side { position: static; order: -1; margin-bottom: 2.5rem; }
+  .writing-side .topic-list { flex-direction: row; gap: 0.5rem 1.2rem; }
+}

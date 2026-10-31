@@ -5,9 +5,9 @@ import SecHead from '../components/SecHead.astro';
 import { FULL_NAME, EXPERIENCE, EDUCATION, AWARDS, CERTIFICATIONS, LANGUAGES, SKILLS, INTERESTS } from '../data/about';
 ---
 <Base title="About" description={`${FULL_NAME}: analytics and machine learning in retail banking.`}>
-  <div class="about">
-    <header class="page-head about-head">
-      <img src="/images/profile.jpg" alt={FULL_NAME} class="avatar" width="150" height="200" />
+  <div class="about about-grid">
+    <header class="about-side">
+      <img src="/images/profile.jpg" alt={FULL_NAME} class="avatar" width="300" height="400" />
       <div>
         <p class="kicker">// Full model documentation · {SITE.location}</p>
         <h1>{FULL_NAME}</h1>
@@ -18,6 +18,8 @@ import { FULL_NAME, EXPERIENCE, EDUCATION, AWARDS, CERTIFICATIONS, LANGUAGES, SK
         </p>
       </div>
     </header>
+
+    <div class="about-main">
 
     <section class="doc-sec">
       <SecHead n="§1" title="Purpose" note="what I work on" />
@@ -86,7 +88,6 @@ import { FULL_NAME, EXPERIENCE, EDUCATION, AWARDS, CERTIFICATIONS, LANGUAGES, SK
               {l.score && <strong>{l.score}</strong>}
               <span>{l.exam}</span>
             </span>
-            <span class="lang-note">{l.note}</span>
           </li>
         ))}
       </ul>
@@ -98,5 +99,6 @@ import { FULL_NAME, EXPERIENCE, EDUCATION, AWARDS, CERTIFICATIONS, LANGUAGES, SK
         {CERTIFICATIONS.map((c) => <li><span>{c.title} · <span class="muted">{c.org}</span></span><span>{c.date}</span></li>)}
       </ul>
     </section>
+    </div>
   </div>
 </Base>
