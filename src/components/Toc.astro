@@ -1,0 +1,28 @@
+---
+// Mục lục từ các heading ## và ### của bài. `spy` = tô sáng mục đang đọc.
+import type { MarkdownHeading } from 'astro';
+interface Props { headings: MarkdownHeading[]; spy?: boolean }
+const { headings, spy = false } = Astro.props;
+---
+<ol class="toc" data-toc-spy={spy ? '' : undefined}>
+  {headings.map((h) => (
+    <li class={`d${h.depth}`}><a href={`#${h.slug}`} data-slug={h.slug}>{h.text}</a></li>
+  ))}
+</ol>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-toc-spy]').forEach((toc) => {
+    const links = [...toc.querySelectorAll<HTMLAnchorElement>('a[data-slug]')];
+    const targets = links.map((a) => document.getElementById(a.dataset.slug!)).filter(Boolean) as HTMLElement[];
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((en) => {
+          if (!en.isIntersecting) return;
+          links.forEach((a) => a.classList.toggle('active', a.dataset.slug === en.target.id));
+        });
+      },
+      { rootMargin: '0px 0px -70% 0px' },
+    );
+    targets.forEach((t) => io.observe(t));
+  });
+</script>

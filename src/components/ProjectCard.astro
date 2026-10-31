@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProjectThumb from './ProjectThumb.astro';
+interface Props { project: CollectionEntry<'projects'>; compact?: boolean }
+const { project, compact = false } = Astro.props;
+const { title, description, tags, status, date, cover, stack } = project.data;
+const statusLabel = { featured: 'Featured', active: 'In progress', archive: String(date.getFullYear()) }[status];
+---
+<article class:list={['project-card', 'cut', { compact }]}>
+  {!compact && (
+    <div class="card-media">
+      {cover ? <img src={cover} alt="" loading="lazy" /> : <ProjectThumb seed={project.id} tags={tags} />}
+    </div>
+  )}
+  <div class="card-body">
+    <div class="meta">
+      <span class:list={['status', status]}>{statusLabel}</span>
+      {project.data.draft && <span class="draft-badge">DRAFT</span>}
+    </div>
+    <h3><a href={`/projects/${project.id}/`}>{title}</a></h3>
+    <p>{description}</p>
+    {!compact && (stack.length > 0 || tags.length > 0) && (
+      <ul class="tags">{(stack.length ? stack : tags).slice(0, 5).map((t) => <li>{t}</li>)}</ul>
+    )}
+  </div>
+</article>

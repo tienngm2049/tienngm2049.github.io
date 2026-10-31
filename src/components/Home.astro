@@ -1,0 +1,165 @@
+---
+// Nội dung trang chủ (index.astro chỉ bọc component này trong Base). Ý tưởng "model report": giới thiệu bản thân như một bản báo cáo mô hình.
+//   Hero (tên + widget cut-off) → dải kỹ năng chạy ngang
+//   §01 Model card (About) → §02 Training log (Experience, timeline ngang)
+//   §03 Validation set (Projects, lưới bento) → §04 Notes (Writing + Now) → khối liên hệ
+import Icon from './Icon.astro';
+import SecHead from './SecHead.astro';
+import ProjectCard from './ProjectCard.astro';
+import CutoffExplorer from './CutoffExplorer.astro';
+import { SITE, SOCIALS, ABOUT_HOME, STATS, MODEL_CARD, NOW } from '../config';
+import { FULL_NAME, EXPERIENCE, SKILLS } from '../data/about';
+import { getPosts, getProjects, formatDate, readingTime } from '../lib/utils';
+
+const allProjects = await getProjects();
+const projects = allProjects.slice(0, 3); // 1 thẻ to + 2 thẻ nhỏ; featured/active trước, thiếu thì lấy archive
+const posts = (await getPosts()).slice(0, 5);
+const epochs = [...EXPERIENCE].reverse(); // cũ → mới, đọc từ trái sang phải
+const ticker = SKILLS.flatMap((g) => g.items);
+const nameParts = FULL_NAME.split(' ');
+const lastWord = nameParts.pop();
+const resumeHref = SITE.cvUrl || '/about/';
+const email = SOCIALS.find((s) => s.icon === 'mail');
+const pad = (n: number, w = 2) => String(n).padStart(w, '0');
+---
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="hud-strip" aria-hidden="true">
+      <span>TN · 2026</span>
+      <span>{SITE.location} · 21.03°N 105.85°E</span>
+      <span data-clock>ICT --:--</span>
+    </div>
+
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="kicker">{SITE.role}</p>
+        <h1 class="hero-name">
+          {nameParts.join(' ')} <span class="hero-outline">{lastWord}</span>
+        </h1>
+        <p class="hero-lede">{SITE.headline}</p>
+        <p class="hero-intro">{SITE.intro}</p>
+        <div class="button-row">
+          <a class="button" href="#projects">See the work <Icon name="arrow" size={14} /></a>
+          <a class="button ghost" href="/blog/">Read the notes</a>
+        </div>
+        <ul class="social-row hero-social">
+          {SOCIALS.map((s) => (
+            <li><a href={s.href} aria-label={s.label} title={s.label}><Icon name={s.icon} size={20} /></a></li>
+          ))}
+        </ul>
+      </div>
+      <div class="hero-panel">
+        <CutoffExplorer />
+      </div>
+    </div>
+  </section>
+
+  <!-- Dải kỹ năng chạy ngang -->
+  <div class="ticker" aria-label="Toolkit">
+    <div class="ticker-track">
+      {[0, 1].map((k) => (
+        <ul aria-hidden={k === 1 ? 'true' : undefined}>
+          {ticker.map((t) => <li>{t}</li>)}
+        </ul>
+      ))}
+    </div>
+  </div>
+
+  <!-- ================= §01 MODEL CARD ================= -->
+  <section id="about" class="sec">
+    <SecHead n="§01" title="Model card" note="about me" />
+    <div class="mc-grid">
+      <div class="mc-text">
+        {ABOUT_HOME.map((p) => <p set:html={p} />)}
+      </div>
+      <dl class="model-card cut">
+        <div class="mc-title"><span>model_card.yaml</span><span class="mc-dots" aria-hidden="true"></span></div>
+        {MODEL_CARD.map((r) => (
+          <div class="mc-row"><dt>{r.k}</dt><dd set:html={r.v} /></div>
+        ))}
+      </dl>
+    </div>
+    <div class="metric-row">
+      {STATS.map((s, i) => (
+        <div class="cut metric">
+          <span class="metric-k">m{pad(i + 1)}</span>
+          <span class="metric-v">{s.value}</span>
+          <span class="metric-l">{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ================= §02 TRAINING LOG ================= -->
+  <section id="experience" class="sec">
+    <SecHead n="§02" title="Training log" note="experience" />
+    <ol class="epochs">
+      {epochs.map((e, i) => (
+        <li class:list={['epoch', { current: i === epochs.length - 1 }]}>
+          <span class="epoch-node" aria-hidden="true"></span>
+          <div class="cut epoch-card">
+            <div class="epoch-meta"><span>epoch {pad(i + 1)}</span><span>{e.period}</span></div>
+            <h3>{e.role}</h3>
+            <p class="epoch-org">{e.org}</p>
+            <p>{e.summary}</p>
+            {e.tech?.length > 0 && <ul class="chips accent">{e.tech.map((t) => <li>{t}</li>)}</ul>}
+          </div>
+        </li>
+      ))}
+    </ol>
+    <a class="arrow-link" href={resumeHref}>Full résumé <Icon name="arrow" size={16} /></a>
+  </section>
+
+  <!-- ================= §03 VALIDATION SET ================= -->
+  <section id="projects" class="sec">
+    <SecHead n="§03" title="Validation set" note="projects" />
+    <div class="bento">
+      {projects.map((p) => <ProjectCard project={p} />)}
+    </div>
+    <a class="arrow-link" href="/projects/">All projects ({allProjects.length}) <Icon name="arrow" size={16} /></a>
+  </section>
+
+  <!-- ================= §04 NOTES ================= -->
+  <section id="writing" class="sec">
+    <SecHead n="§04" title="Notes" note="writing" />
+    <div class="notes-grid">
+      <ol class="note-list">
+        {posts.map((p, i) => (
+          <li>
+            <span class="note-n">{pad(i + 1, 3)}</span>
+            <div>
+              <a href={`/blog/${p.id}/`} class="note-title">{p.data.title}</a>
+              {p.data.draft && <span class="draft-badge">DRAFT</span>}
+              <p>{p.data.description}</p>
+              <span class="note-meta">{formatDate(p.data.date)} · {readingTime(p.body ?? '')} min</span>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <aside class="cut now-card">
+        <p class="kicker">// Now</p>
+        <ul>{NOW.map((n) => <li>{n}</li>)}</ul>
+      </aside>
+    </div>
+    <a class="arrow-link" href="/blog/">All writing <Icon name="arrow" size={16} /></a>
+  </section>
+
+  <!-- ================= LIÊN HỆ ================= -->
+  <section class="cut contact">
+    <p class="kicker">// End of report</p>
+    <h2>Got a credit risk question, an ML problem, or a dataset you can't stop thinking about?</h2>
+    <div class="button-row">
+      {email && <a class="button" href={email.href}>Say hello <Icon name="mail" size={14} /></a>}
+      <a class="button ghost" href="/about/">More about me</a>
+    </div>
+  </section>
+
+  <script>
+    // Đồng hồ giờ Hà Nội ở dải HUD trên cùng
+    const el = document.querySelector('[data-clock]');
+    const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit' });
+    const tick = () => { if (el) el.textContent = `ICT ${fmt.format(new Date())}`; };
+    tick();
+    setInterval(tick, 30_000);
+  </script>

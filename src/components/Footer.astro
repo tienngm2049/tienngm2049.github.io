@@ -1,0 +1,18 @@
+---
+import { SITE, SOCIALS } from '../config';
+import Icon from './Icon.astro';
+const now = new Date();
+const year = now.getFullYear();
+// Ngày build: tự đổi mỗi lần deploy
+const built = now.toISOString().slice(0, 10);
+---
+<footer class="site-footer">
+  <div class="container wide footer-inner">
+    <span>© {year} {SITE.name} · built with <a href="https://astro.build">Astro</a> · <a href={SITE.sourceUrl}>source</a>
+      <span class="retrained">last retrained: <time datetime={built}>{built}</time></span>
+    </span>
+    <span class="social-row">
+      {SOCIALS.map((s) => <a href={s.href} aria-label={s.label} title={s.label}><Icon name={s.icon} size={18} /></a>)}
+    </span>
+  </div>
+</footer>

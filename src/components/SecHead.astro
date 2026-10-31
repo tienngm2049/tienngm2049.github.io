@@ -1,0 +1,11 @@
+---
+// Tiêu đề section kiểu "§01 Tên ////// ghi chú". Dùng ở trang chủ và trang About.
+interface Props { n: string; title: string; note?: string }
+const { n, title, note } = Astro.props;
+---
+<header class="sec-head">
+  <span class="sec-n">{n}</span>
+  <h2>{title}</h2>
+  <span class="sec-rule" aria-hidden="true"></span>
+  {note && <span class="sec-note">{note}</span>}
+</header>

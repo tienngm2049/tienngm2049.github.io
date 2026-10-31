@@ -1,0 +1,61 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getProjects, formatDate } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((p) => ({ params: { slug: p.id }, props: { project: p } }));
+}
+const { project } = Astro.props;
+const { Content } = await render(project);
+const d = project.data;
+const summary = [
+  ['Problem', d.problem],
+  ['Approach', d.approach],
+  ['Outcome', d.outcome],
+].filter(([, v]) => v);
+---
+<Base title={d.title} description={d.description} math>
+  <article class="prose">
+    <header class="article-head">
+      <p class="kicker">{'// '}<a href="/projects/">Projects</a> · {formatDate(d.date)}
+        {d.status === 'archive' && <> · archive</>}
+        {d.draft && <span class="draft-badge">DRAFT</span>}
+      </p>
+      <h1>{d.title}</h1>
+      <p class="lede">{d.description}</p>
+      {(d.repo || d.demo) && (
+        <p class="button-row">
+          {d.repo && <a class="button" href={d.repo}>Code on GitHub ↗</a>}
+          {d.demo && <a class="button ghost" href={d.demo}>Live demo ↗</a>}
+        </p>
+      )}
+    </header>
+
+    {d.metrics.length > 0 && (
+      <section class="val-metrics" aria-label="Validation metrics">
+        <p class="kicker">// Validation metrics · public data</p>
+        <div class="metric-row">
+          {d.metrics.map((m, i) => (
+            <div class="cut metric">
+              <span class="metric-k">m{String(i + 1).padStart(2, '0')} · {m.label}</span>
+              <span class="metric-v">{m.value}</span>
+              {m.note && <span class="metric-l">{m.note}</span>}
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {(summary.length > 0 || d.stack.length > 0) && (
+      <dl class="case-summary">
+        {summary.map(([k, v]) => (<><dt>{k}</dt><dd>{v}</dd></>))}
+        {d.stack.length > 0 && (<><dt>Stack</dt><dd>{d.stack.join(' · ')}</dd></>)}
+      </dl>
+    )}
+
+    {d.cover && <img class="cover" src={d.cover} alt="" loading="lazy" />}
+    <Content />
+  </article>
+</Base>

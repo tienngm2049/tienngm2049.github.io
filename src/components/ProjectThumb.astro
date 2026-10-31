@@ -1,0 +1,60 @@
+---
+// Ảnh minh hoạ tự sinh cho project chưa có ảnh `cover`.
+// Kiểu hình dựa vào tag; độ "ngẫu nhiên" cố định theo tên project (lần nào build cũng giống nhau).
+interface Props { seed: string; tags: string[] }
+const { seed, tags } = Astro.props;
+
+let h = 2166136261;
+for (const ch of seed) h = Math.imul(h ^ ch.charCodeAt(0), 16777619);
+const rand = () => ((h = Math.imul(h ^ (h >>> 15), 2246822507) ^ Math.imul(h ^ (h >>> 13), 3266489909)), (h >>> 0) / 4294967296);
+
+const has = (...k: string[]) => tags.some((t) => k.some((x) => t.includes(x)));
+const kind = has('credit', 'scorecard', 'classification') ? 'roc'
+  : has('cluster', 'segment', 'unsupervised') ? 'scatter'
+  : has('ab-test', 'hypothesis', 'statistics') ? 'bells'
+  : 'bars';
+
+const W = 320, H = 140;
+const k = 0.12 + rand() * 0.25;
+const rocPts = Array.from({ length: 41 }, (_, i) => {
+  const x = i / 40;
+  return `${20 + x * 280},${H - 14 - Math.pow(x, k) * (H - 28)}`;
+}).join(' ');
+const centers = [0, 1, 2].map(() => [60 + rand() * 200, 30 + rand() * 80]);
+const dots = Array.from({ length: 60 }, (_, i) => {
+  const [cx, cy] = centers[i % 3];
+  return { x: cx + (rand() - 0.5) * 60, y: cy + (rand() - 0.5) * 40, g: i % 3 };
+});
+const bell = (mu: number) =>
+  Array.from({ length: 61 }, (_, i) => {
+    const x = i / 60;
+    return `${20 + x * 280},${H - 14 - Math.exp(-((x - mu) ** 2) / 0.02) * (H - 34)}`;
+  }).join(' ');
+const m1 = 0.35 + rand() * 0.1;
+const bars = Array.from({ length: 12 }, () => 15 + rand() * (H - 40));
+---
+<svg viewBox={`0 0 ${W} ${H}`} class="thumb" aria-hidden="true">
+  <defs>
+    <pattern id={`g-${seed}`} width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M20 0H0V20" class="thumb-grid" />
+    </pattern>
+  </defs>
+  <rect width={W} height={H} fill={`url(#g-${seed})`} />
+  {kind === 'roc' && (
+    <>
+      <line x1="20" y1={H - 14} x2="300" y2="14" class="thumb-faint" />
+      <polyline points={`20,${H - 14} ${rocPts} 300,${H - 14}`} class="thumb-area" />
+      <polyline points={rocPts} class="thumb-line" />
+    </>
+  )}
+  {kind === 'scatter' && dots.map((d) => <circle cx={d.x} cy={d.y} r="3.2" class={`thumb-dot g${d.g}`} />)}
+  {kind === 'bells' && (
+    <>
+      <polyline points={bell(m1)} class="thumb-line alt" />
+      <polyline points={bell(m1 + 0.25)} class="thumb-line" />
+    </>
+  )}
+  {kind === 'bars' && bars.map((b, i) => (
+    <rect x={24 + i * 23} y={H - 14 - b} width="15" height={b} rx="2" class={i === 8 ? 'thumb-bar hi' : 'thumb-bar'} />
+  ))}
+</svg>

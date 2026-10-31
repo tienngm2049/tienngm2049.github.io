@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, SOCIALS } from '../config';
+import SecHead from '../components/SecHead.astro';
+import { FULL_NAME, EXPERIENCE, EDUCATION, AWARDS, CERTIFICATIONS, LANGUAGES, SKILLS, INTERESTS } from '../data/about';
+---
+<Base title="About" description={`${FULL_NAME}: analytics and machine learning in retail banking.`}>
+  <div class="about">
+    <header class="page-head about-head">
+      <img src="/images/profile.jpg" alt={FULL_NAME} class="avatar" width="150" height="200" />
+      <div>
+        <p class="kicker">// Full model documentation · {SITE.location}</p>
+        <h1>{FULL_NAME}</h1>
+        <p class="lede">{SITE.intro}</p>
+        <p class="button-row">
+          {SITE.cvUrl && <a class="button" href={SITE.cvUrl}>Download CV ↓</a>}
+          {SOCIALS.map((s, i) => <a class:list={['button', { ghost: SITE.cvUrl || i > 0 }]} href={s.href}>{s.label}</a>)}
+        </p>
+      </div>
+    </header>
+
+    <section class="doc-sec">
+      <SecHead n="§1" title="Purpose" note="what I work on" />
+      <p>
+        I came to data from economics. Today I build models and analytics for retail lending at
+        Techcombank: who applies, who gets approved, who is worth calling, who stays, and which
+        levers move those numbers. I'm most interested in the step between a business question and
+        a decision: writing the problem down precisely enough that a statistical model can answer
+        it, then making sure the answer is actually used.
+      </p>
+      <ul>{INTERESTS.map((i) => <li>{i}</li>)}</ul>
+    </section>
+
+    <section class="doc-sec">
+      <SecHead n="§2" title="Training history" note="experience" />
+      <ol class="timeline">
+        {EXPERIENCE.map((e) => (
+          <li>
+            <div class="tl-head"><strong>{e.role}</strong> · {e.org}</div>
+            {e.period && <div class="muted small">{e.period}</div>}
+            {e.points.length > 0 && <ul>{e.points.map((p) => <li>{p}</li>)}</ul>}
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="doc-sec">
+      <SecHead n="§3" title="Evaluation" note="awards" />
+      <ul class="awards">
+        {AWARDS.map((a) => <li><span><strong>{a.title}</strong> · <span class="muted">{a.org}</span></span><span>{a.date}</span></li>)}
+      </ul>
+    </section>
+
+    <section class="doc-sec">
+      <SecHead n="§4" title="Data sources" note="education" />
+      <ol class="timeline">
+        {EDUCATION.map((e) => (
+          <li>
+            <div class="tl-head"><strong>{e.degree}</strong></div>
+            <div class="muted small">{e.org}{e.period && ` · ${e.period}`}</div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="doc-sec">
+      <SecHead n="§5" title="Feature set" note="skills" />
+      <div class="toolkit">
+        {SKILLS.map((s) => (
+          <div class="tool-group">
+            <span class="kicker">{s.group}</span>
+            <ul class="chips">{s.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="doc-sec">
+      <SecHead n="§6" title="Multilingual support" note="languages" />
+      <ul class="lang-grid">
+        {LANGUAGES.map((l) => (
+          <li class="cut lang-card">
+            <span class="lang-glyph" aria-hidden="true">{l.glyph}</span>
+            <span class="lang-name">{l.name}</span>
+            <span class="lang-score">
+              {l.score && <strong>{l.score}</strong>}
+              <span>{l.exam}</span>
+            </span>
+            <span class="lang-note">{l.note}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="doc-sec">
+      <SecHead n="§7" title="Benchmarks passed" note="certifications" />
+      <ul class="certs">
+        {CERTIFICATIONS.map((c) => <li><span>{c.title} · <span class="muted">{c.org}</span></span><span>{c.date}</span></li>)}
+      </ul>
+    </section>
+  </div>
+</Base>

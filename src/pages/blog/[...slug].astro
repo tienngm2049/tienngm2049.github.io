@@ -1,0 +1,88 @@
+---
+// Trang một bài viết: mục lục bám theo khi cuộn, thời gian đọc, khung "Cite as", bài trước/sau.
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Toc from '../../components/Toc.astro';
+import { SITE } from '../../config';
+import { FULL_NAME } from '../../data/about';
+import { getPosts, formatDate, readingTime } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const posts = await getPosts(); // mới nhất trước
+  return posts.map((p, i) => ({
+    params: { slug: p.id },
+    props: { post: p, newer: posts[i - 1], older: posts[i + 1] },
+  }));
+}
+const { post, newer, older } = Astro.props;
+const { Content, headings } = await render(post);
+const d = post.data;
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const url = new URL(`/blog/${post.id}/`, Astro.site).toString();
+// Họ tên kiểu Việt: "Nguyen Manh Tien" -> họ "Nguyen", tên "Manh Tien"
+const [lastName, ...given] = FULL_NAME.split(' ');
+const givenName = given.join(' ');
+const year = d.date.getFullYear();
+const month = d.date.toLocaleString('en', { month: 'short' });
+const bibKey = `${lastName.toLowerCase()}${year}${post.id.split('-')[0]}`;
+const bibtex = `@article{${bibKey},
+  title   = "${d.title.replace(/"/g, "'")}",
+  author  = "${lastName}, ${givenName}",
+  journal = "${Astro.site!.host}",
+  year    = "${year}",
+  month   = "${month}",
+  url     = "${url}"
+}`;
+---
+<Base title={d.title} description={d.description} math wide>
+  <div class:list={['post-layout', { 'has-toc': toc.length > 0 }]}>
+    <article class="prose" lang={d.lang}>
+      <header class="article-head">
+        <p class="kicker">
+          // <a href="/blog/">Writing</a>
+          {d.draft && <span class="draft-badge">DRAFT</span>}
+        </p>
+        <h1>{d.title}</h1>
+        <p class="lede">{d.description}</p>
+        <p class="post-meta">
+          <time datetime={d.date.toISOString()}>{formatDate(d.date)}</time>
+          {d.updated && <span>updated {formatDate(d.updated)}</span>}
+          <span>{readingTime(post.body)} min read</span>
+          <span>{SITE.name}</span>
+        </p>
+        {d.tags.length > 0 && (
+          <ul class="chips">{d.tags.map((t) => <li><a href={`/tags/${t}/`}>{t}</a></li>)}</ul>
+        )}
+      </header>
+
+      {toc.length > 0 && (
+        <details class="cut toc-inline">
+          <summary>Table of contents</summary>
+          <Toc headings={toc} />
+        </details>
+      )}
+
+      <Content />
+
+      <section class="cut cite-box">
+        <p class="kicker">// Cite as</p>
+        <p>
+          {lastName}, {givenName}. ({year}, {month}). {d.title}. <em>{SITE.name}</em>. {url}
+        </p>
+        <pre><code>{bibtex}</code></pre>
+      </section>
+
+      <nav class="post-nav" aria-label="More posts">
+        {older ? <a class="cut" href={`/blog/${older.id}/`}><span class="kicker">← Older</span>{older.data.title}</a> : <span></span>}
+        {newer ? <a class="cut next" href={`/blog/${newer.id}/`}><span class="kicker">Newer →</span>{newer.data.title}</a> : <span></span>}
+      </nav>
+    </article>
+
+    {toc.length > 0 && (
+      <aside class="toc-side" aria-label="Table of contents">
+        <p class="kicker">// Contents</p>
+        <Toc headings={toc} spy />
+      </aside>
+    )}
+  </div>
+</Base>

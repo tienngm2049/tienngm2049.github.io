@@ -1,0 +1,90 @@
+---
+// Layout gốc: mọi trang đều được "bọc" bởi file này (head, header, footer).
+import { SITE } from '../config';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  math?: boolean; // true -> nạp CSS của KaTeX để hiển thị công thức
+  wide?: boolean; // true -> nội dung rộng (danh sách project, trang bài viết có mục lục)
+}
+const { title, description = SITE.description, math = false, wide = false } = Astro.props;
+const fullTitle = title ? `${title} · ${SITE.name}` : SITE.title;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Saira:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
+    {math && <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.css" />}
+    <script is:inline>
+      // Áp theme đã chọn trước khi trang hiện ra, tránh bị "nháy" màu
+      try {
+        const t = localStorage.getItem('theme');
+        if (t) document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+    {SITE.gtmId && (
+      <script is:inline define:vars={{ id: SITE.gtmId }}>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',id);
+      </script>
+    )}
+  </head>
+  <body>
+    <div class="grid-glow" aria-hidden="true"></div>
+    <Header />
+    <main class:list={['container', { wide }]}>
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      // Lưới nền sáng lên quanh con trỏ (chỉ trên máy có chuột; tắt nếu người dùng giảm chuyển động)
+      if (matchMedia('(hover: hover) and (pointer: fine)').matches &&
+          !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const root = document.documentElement;
+        let raf = 0, x = 0, y = 0;
+        window.addEventListener('pointermove', (e) => {
+          x = e.clientX; y = e.clientY;
+          if (!raf) raf = requestAnimationFrame(() => {
+            root.style.setProperty('--mx', `${x}px`);
+            root.style.setProperty('--my', `${y}px`);
+            root.classList.add('glow-on');
+            raf = 0;
+          });
+        }, { passive: true });
+        document.addEventListener('pointerleave', () => root.classList.remove('glow-on'));
+      }
+      // Nút đổi theme sáng / tối
+      document.querySelectorAll('[data-theme-toggle]').forEach((btn) =>
+        btn.addEventListener('click', () => {
+          const root = document.documentElement;
+          const isDark = root.dataset.theme === 'dark' ||
+            (!root.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);
+          const next = isDark ? 'light' : 'dark';
+          root.dataset.theme = next;
+          try { localStorage.setItem('theme', next); } catch (e) {}
+        }),
+      );
+    </script>
+  </body>
+</html>

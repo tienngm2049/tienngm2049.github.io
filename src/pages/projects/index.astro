@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getProjects } from '../../lib/utils';
+
+const all = await getProjects();
+const current = all.filter((p) => p.data.status !== 'archive');
+const archive = all.filter((p) => p.data.status === 'archive');
+---
+<Base title="Projects" description="Case studies in credit risk, decision science and machine learning." wide>
+  <header class="page-head">
+    <p class="kicker">// Case studies &amp; archive</p>
+    <h1>Projects</h1>
+    <p class="lede">Each one is written as a case study: the problem, how I formulated it, what I built, and what it changed.</p>
+  </header>
+  {current.length > 0 && (
+    <section>
+      <div class="project-grid">{current.map((p) => <ProjectCard project={p} />)}</div>
+    </section>
+  )}
+  <section id="archive" class="block-sm">
+    <h2 class="label-head">Archive · early learning projects (2023)</h2>
+    <div class="project-grid">{archive.map((p) => <ProjectCard project={p} compact />)}</div>
+  </section>
+</Base>

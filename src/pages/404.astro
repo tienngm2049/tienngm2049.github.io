@@ -1,0 +1,43 @@
+---
+// Trang 404 theo kiểu "out-of-distribution": đường dẫn lạ nằm lệch hẳn khỏi phân phối.
+import Base from '../layouts/Base.astro';
+import { normPdf } from '../lib/stats';
+
+const W = 520, H = 200, BASE = 160, PEAK = 120;
+const MU = 0, SD = 1, XMIN = -4, XMAX = 9;
+const sx = (x: number) => 20 + ((x - XMIN) / (XMAX - XMIN)) * (W - 40);
+const pts: string[] = [];
+for (let x = XMIN; x <= XMAX; x += 0.1) {
+  pts.push(`${sx(x).toFixed(1)},${(BASE - (normPdf(x, MU, SD) / normPdf(0, MU, SD)) * PEAK).toFixed(1)}`);
+}
+const curve = `M${sx(XMIN)},${BASE} L${pts.join(' L')} L${sx(XMAX)},${BASE} Z`;
+const Z = 7.4; // độ lệch của "trang này"
+---
+<Base title="Not found">
+  <div class="ood">
+    <p class="kicker">// Error 404 · out-of-distribution input</p>
+    <h1>This page is <span class="hero-outline">7.4σ</span> from anything I've published.</h1>
+
+    <figure class="cut ood-fig">
+      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="A normal distribution of known pages, with this request far out in the right tail">
+        <path d={curve} class="ood-curve" />
+        <line x1="20" x2={W - 20} y1={BASE} y2={BASE} class="ex-axis" />
+        {[-3, 0, 3, 6, 9].map((t) => (
+          <text x={sx(t)} y={BASE + 18} class="ex-tick">{t === 0 ? 'μ' : `${t > 0 ? '+' : ''}${t}σ`}</text>
+        ))}
+        <text x={sx(0)} y={BASE - PEAK - 8} class="ex-legend good">pages that exist</text>
+        <line x1={sx(Z)} x2={sx(Z)} y1="40" y2={BASE} class="ex-cut" />
+        <circle cx={sx(Z)} cy={BASE - 3} r="5" class="ood-dot" />
+        <text x={sx(Z)} y="32" class="ex-cut-label">you are here</text>
+      </svg>
+      <figcaption class="ood-cap">p(this URL | site) ≈ 10<sup>−13</sup> · flagged for manual review</figcaption>
+    </figure>
+
+    <p class="lede">The link may be old, or mistyped. Try one of these in-distribution samples instead:</p>
+    <p class="button-row">
+      <a class="button" href="/">Home</a>
+      <a class="button ghost" href="/projects/">Projects</a>
+      <a class="button ghost" href="/blog/">Writing</a>
+    </p>
+  </div>
+</Base>

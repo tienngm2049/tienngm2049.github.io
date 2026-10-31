@@ -1,0 +1,69 @@
+---
+// Trang Writing: "Start here" (bài featured) → chủ đề (tag + số bài) → toàn bộ bài theo năm.
+import Base from '../../layouts/Base.astro';
+import { getPosts, formatDate, readingTime } from '../../lib/utils';
+
+const posts = await getPosts();
+const featured = posts.filter((p) => p.data.featured);
+
+const tagCounts = new Map<string, number>();
+posts.forEach((p) => p.data.tags.forEach((t) => tagCounts.set(t, (tagCounts.get(t) ?? 0) + 1)));
+const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+
+const byYear = new Map<number, typeof posts>();
+posts.forEach((p) => {
+  const y = p.data.date.getFullYear();
+  byYear.set(y, [...(byYear.get(y) ?? []), p]);
+});
+---
+<Base title="Writing" description="Notes on statistics, credit risk modelling and machine learning." wide>
+  <div class="reading-col">
+    <header class="page-head">
+      <p class="kicker">// Writing · {posts.length} posts</p>
+      <h1>Writing</h1>
+      <p class="lede">
+        Notes on statistics, credit risk modelling and machine learning in banking, written to make
+        sure I actually understand them. Occasionally something else.
+      </p>
+    </header>
+
+    {featured.length > 0 && (
+      <section class="block-sm">
+        <h2 class="label-head">Start here</h2>
+        <div class="start-grid">
+          {featured.map((p) => (
+            <a class="cut start-card" href={`/blog/${p.id}/`}>
+              <span class="kicker">{p.data.tags[0] ?? 'post'}</span>
+              <strong>{p.data.title}</strong>
+              <span class="muted small">{p.data.description}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {tags.length > 0 && (
+      <section class="block-sm">
+        <h2 class="label-head">Topics</h2>
+        <ul class="topic-list">
+          {tags.map(([t, n]) => <li><a href={`/tags/${t}/`}>{t}<sup>{n}</sup></a></li>)}
+        </ul>
+      </section>
+    )}
+
+    {[...byYear.entries()].map(([year, list]) => (
+      <section class="block-sm">
+        <h2 class="year-head"><span>{year}</span></h2>
+        <ul class="archive-list">
+          {list.map((p) => (
+            <li>
+              <a href={`/blog/${p.id}/`}>{p.data.title}</a>
+              {p.data.draft && <span class="draft-badge">DRAFT</span>}
+              <span class="archive-meta">{formatDate(p.data.date)} · {readingTime(p.body)} min</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</Base>

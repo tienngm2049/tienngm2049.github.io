@@ -1,12 +1,21 @@
-# Local Site Directories
-_site/
-.sass-cache/
-.jekyll-cache/
-.jekyll-metadata
-
-# Ruby Gems
-.bundle
-Gemfile.lock
-
-# Log Files
+# build output
+dist/
+.astro/
+# dependencies
+node_modules/
+# logs & env
 *.log
+.env
+.env.*
+# CV gốc có số điện thoại + số liệu nội bộ: KHÔNG đưa lên repo public.
+# Bản CV công khai (đã lược bớt) thì để ở public/cv.pdf.
+TienNguyen_CV_updated.pdf
+*_private.pdf
+# Ảnh gốc chưa cắt (bản dùng trên site: public/images/profile.jpg)
+Gemini_Generated_Image_*.png
+# OS
+.DS_Store
+Thumbs.db
+
+# Ảnh đại diện gốc chưa cắt
+avatar_*.png

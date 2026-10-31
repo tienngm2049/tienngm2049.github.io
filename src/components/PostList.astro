@@ -1,0 +1,18 @@
+---
+// Danh sách bài viết dạng gọn: ngày — tiêu đề — mô tả
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../lib/utils';
+interface Props { posts: CollectionEntry<'posts'>[] }
+const { posts } = Astro.props;
+---
+<ul class="post-list">
+  {posts.map((p) => (
+    <li>
+      <time datetime={p.data.date.toISOString()}>{formatDate(p.data.date)}</time>
+      <div>
+        <a href={`/blog/${p.id}/`} class="post-title">{p.data.title}</a>
+        <p>{p.data.description}</p>
+      </div>
+    </li>
+  ))}
+</ul>

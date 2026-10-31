@@ -1,0 +1,98 @@
+---
+// Widget tương tác: kéo cut-off, xem approval rate / bad rate / điểm trên ROC thay đổi.
+// Đường cong vẽ sẵn lúc build; chỉ phần đường cut-off và con số được cập nhật bằng JS.
+import { SIM, normPdf, normCdf, simAuc } from '../lib/stats';
+
+const W = 420, H = 190, L = 14, R = 14, BASE = 158, PEAK = 120;
+const sx = (s: number) => L + ((s - SIM.min) / (SIM.max - SIM.min)) * (W - L - R);
+const peak = normPdf(SIM.good.mu, SIM.good.mu, SIM.good.sigma);
+const curve = (mu: number, sigma: number) => {
+  const pts: string[] = [];
+  for (let s = SIM.min; s <= SIM.max; s += 5) {
+    pts.push(`${sx(s).toFixed(1)},${(BASE - (normPdf(s, mu, sigma) / peak) * PEAK).toFixed(1)}`);
+  }
+  return `M${sx(SIM.min)},${BASE} L${pts.join(' L')} L${sx(SIM.max)},${BASE} Z`;
+};
+const goodPath = curve(SIM.good.mu, SIM.good.sigma);
+const badPath = curve(SIM.bad.mu, SIM.bad.sigma);
+const ticks = [400, 500, 600, 700, 800];
+
+// ROC: x = % good bị từ chối (FPR), y = % bad bị từ chối (TPR)
+const RS = 92;
+const roc: string[] = [];
+for (let c = SIM.min - 100; c <= SIM.max + 100; c += 5) {
+  roc.push(`${(normCdf(c, SIM.good.mu, SIM.good.sigma) * RS).toFixed(1)},${(RS - normCdf(c, SIM.bad.mu, SIM.bad.sigma) * RS).toFixed(1)}`);
+}
+const auc = simAuc();
+const init = 560;
+---
+<figure class="explorer cut" data-explorer data-l={L} data-r={R} data-w={W}>
+  <figcaption>
+    <span class="kicker">Interactive · simulated scorecard</span>
+    <strong>Where would you set the cut-off?</strong>
+  </figcaption>
+
+  <svg viewBox={`0 0 ${W} ${H}`} class="ex-dist" role="img" aria-label="Score distributions of good and bad applicants with an adjustable cut-off">
+    <rect data-decline x={L} y="20" width={sx(init) - L} height={BASE - 20} class="ex-decline" />
+    <path d={goodPath} class="ex-good" />
+    <path d={badPath} class="ex-bad" />
+    <line x1={L} x2={W - R} y1={BASE} y2={BASE} class="ex-axis" />
+    {ticks.map((t) => (
+      <g>
+        <line x1={sx(t)} x2={sx(t)} y1={BASE} y2={BASE + 4} class="ex-axis" />
+        <text x={sx(t)} y={BASE + 16} class="ex-tick">{t}</text>
+      </g>
+    ))}
+    <g data-cut transform={`translate(${sx(init)},0)`}>
+      <line x1="0" x2="0" y1="14" y2={BASE} class="ex-cut" />
+      <text x="0" y="10" class="ex-cut-label" data-cut-label>{init}</text>
+    </g>
+    <text x={sx(SIM.bad.mu)} y={BASE - PEAK - 6} class="ex-legend bad">bad</text>
+    <text x={sx(SIM.good.mu)} y={BASE - PEAK - 6} class="ex-legend good">good</text>
+    <text x={L + 4} y="34" class="ex-zone">declined</text>
+    <text x={W - R - 4} y="34" class="ex-zone end">approved</text>
+  </svg>
+
+  <input type="range" min="420" max="760" step="5" value={init} aria-label="Score cut-off" data-range />
+
+  <div class="ex-bottom">
+    <dl class="ex-stats">
+      <div><dt>Approval rate</dt><dd data-approval>–</dd></div>
+      <div><dt>Bad rate (approved)</dt><dd data-badrate>–</dd></div>
+      <div><dt>Bads declined</dt><dd data-caught>–</dd></div>
+    </dl>
+    <svg viewBox={`-6 -6 ${RS + 12} ${RS + 22}`} class="ex-roc" role="img" aria-label="ROC curve">
+      <rect x="0" y="0" width={RS} height={RS} class="ex-roc-box" />
+      <line x1="0" y1={RS} x2={RS} y2="0" class="ex-diag" />
+      <polyline points={roc.join(' ')} class="ex-roc-line" />
+      <circle r="3.5" data-roc-dot class="ex-dot" />
+      <text x={RS / 2} y={RS + 13} class="ex-tick">ROC · Gini {(2 * auc - 1).toFixed(2)}</text>
+    </svg>
+  </div>
+</figure>
+
+<script>
+  import { cutoffStats, SIM } from '../lib/stats';
+  const pct = (x: number, d = 1) => `${(x * 100).toFixed(d)}%`;
+  document.querySelectorAll<HTMLElement>('[data-explorer]').forEach((root) => {
+    const L = +root.dataset.l!, R = +root.dataset.r!, W = +root.dataset.w!;
+    const sx = (s: number) => L + ((s - SIM.min) / (SIM.max - SIM.min)) * (W - L - R);
+    const $ = <T extends Element>(sel: string) => root.querySelector<T>(sel)!;
+    const range = $<HTMLInputElement>('[data-range]');
+    const update = () => {
+      const c = +range.value;
+      const s = cutoffStats(c);
+      $('[data-cut]').setAttribute('transform', `translate(${sx(c)},0)`);
+      $('[data-cut-label]').textContent = String(c);
+      $('[data-decline]').setAttribute('width', String(sx(c) - L));
+      $('[data-approval]').textContent = pct(s.approval, 0);
+      $('[data-badrate]').textContent = pct(s.badRate, 2);
+      $('[data-caught]').textContent = pct(s.badDeclined, 0);
+      const dot = $('[data-roc-dot]');
+      dot.setAttribute('cx', (s.goodDeclined * 92).toFixed(1));
+      dot.setAttribute('cy', (92 - s.badDeclined * 92).toFixed(1));
+    };
+    range.addEventListener('input', update);
+    update();
+  });
+</script>
