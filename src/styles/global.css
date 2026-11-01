@@ -6,15 +6,16 @@
 
 /* ---------- 1. Màu & font ---------- */
 :root {
-  --bg: #f6f6f2;
+  /* Nền sáng "Blueprint": trắng xanh lạnh, chữ mực navy, cùng họ màu với nền tối navy */
+  --bg: #f3f6f9;
   --surface: #ffffff;
-  --text: #15191e;
-  --muted: #5d6570;
-  --border: #dcdcd4;
-  --grid: rgb(20 30 40 / 0.045);
+  --text: #0d1b2a;
+  --muted: #526173;
+  --border: #d4dce6;
+  --grid: rgb(30 70 120 / 0.06);
   --accent: #0b7a68;          /* màu nhấn chính */
-  --accent-soft: #e0f0ec;
-  --code-bg: #efefea;
+  --accent-soft: #dcefeb;
+  --code-bg: #e8edf3;
   --good: #2f7d6d;
   --bad: #c4513b;
 

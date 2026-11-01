@@ -77,16 +77,19 @@ Mở `src/styles/global.css`. Ở đầu file có các **biến CSS**:
 
 ```css
 :root {
-  --bg: #fbfaf7;       /* nền */
-  --text: #1c1d1f;     /* chữ */
-  --accent: #0f6b5c;   /* màu nhấn: link, nút, nhãn */
+  --bg: #f3f6f9;       /* nền */
+  --text: #0d1b2a;     /* chữ */
+  --accent: #0b7a68;   /* màu nhấn: link, nút, nhãn */
   ...
 }
 ```
 
-**Mặc định nền tối:** thẻ `<html data-theme="dark">` trong `src/layouts/Base.astro`. Người xem bấm nút ◐
-thì site nhớ lựa chọn của họ. Muốn mặc định nền sáng thì đổi thành `data-theme="light"`; muốn theo
+**Mặc định nền sáng:** thẻ `<html data-theme="light">` trong `src/layouts/Base.astro`. Người xem bấm nút ◐
+thì site nhớ lựa chọn của họ. Muốn mặc định nền tối thì đổi thành `data-theme="dark"`; muốn theo
 cài đặt máy người xem thì xoá hẳn thuộc tính `data-theme`.
+
+Nền sáng dùng tông **"Blueprint"**: nền trắng xanh lạnh `#f3f6f9`, chữ mực navy `#0d1b2a`, lưới ánh xanh dương,
+cùng họ màu với nền tối navy (tránh tông kem ấm vốn dễ trông giống các sản phẩm khác).
 
 Đổi `--accent` là đổi được "màu thương hiệu" của cả site. Nhớ đổi luôn bản dark mode (khối
 `[data-theme='dark']` và khối `@media (prefers-color-scheme: dark)`, hai khối có cùng giá trị).
